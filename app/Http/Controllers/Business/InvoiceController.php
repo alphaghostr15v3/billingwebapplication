@@ -37,12 +37,28 @@ class InvoiceController extends Controller
 
         return DB::connection('tenant')->transaction(function () use ($request) {
             $invoiceNumber = 'INV-' . strtoupper(Str::random(8));
+            $business = auth()->user()->business;
+            $customer = Customer::findOrFail($request->customer_id);
+
+            $cgstAmount = 0;
+            $sgstAmount = 0;
+            $igstAmount = 0;
+
+            if ($business->state === $customer->state) {
+                $cgstAmount = $request->tax_amount / 2;
+                $sgstAmount = $request->tax_amount / 2;
+            } else {
+                $igstAmount = $request->tax_amount;
+            }
             
             $invoice = Invoice::create([
                 'invoice_number' => $invoiceNumber,
                 'customer_id' => $request->customer_id,
                 'subtotal' => $request->subtotal,
                 'tax_amount' => $request->tax_amount,
+                'cgst_amount' => $cgstAmount,
+                'sgst_amount' => $sgstAmount,
+                'igst_amount' => $igstAmount,
                 'discount_amount' => $request->discount_amount ?? 0,
                 'total_amount' => $request->total_amount,
                 'payment_method' => $request->payment_method ?? 'cash',

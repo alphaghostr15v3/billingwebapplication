@@ -13,6 +13,8 @@ class Business extends Model
         'owner_name',
         'email',
         'phone',
+        'gst_number',
+        'state',
         'database_name',
         'status',
         'subscription_id',

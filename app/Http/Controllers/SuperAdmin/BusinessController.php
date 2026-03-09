@@ -25,6 +25,8 @@ class BusinessController extends Controller
             'owner_name' => 'required',
             'email' => 'required|email|unique:businesses,email',
             'phone' => 'required',
+            'gst_number' => 'nullable|string|max:20',
+            'state' => 'required|string',
             'password' => 'required|min:8',
         ]);
 
@@ -36,6 +38,8 @@ class BusinessController extends Controller
             'owner_name' => $request->owner_name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'gst_number' => $request->gst_number,
+            'state' => $request->state,
             'database_name' => $dbName,
             'status' => 'active',
         ]);
@@ -67,9 +71,11 @@ class BusinessController extends Controller
             'owner_name' => 'required',
             'email' => 'required|email|unique:businesses,email,' . $business->id,
             'phone' => 'required',
+            'gst_number' => 'nullable|string|max:20',
+            'state' => 'required|string',
         ]);
 
-        $business->update($request->only(['business_name', 'owner_name', 'email', 'phone']));
+        $business->update($request->only(['business_name', 'owner_name', 'email', 'phone', 'gst_number', 'state']));
 
         return redirect()->back()->with('success', 'Business updated successfully!');
     }

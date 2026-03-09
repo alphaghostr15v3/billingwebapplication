@@ -14,6 +14,7 @@ class Customer extends Model
         'email',
         'gst_number',
         'address',
+        'state',
     ];
 
     public function invoices()

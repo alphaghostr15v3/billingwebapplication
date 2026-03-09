@@ -101,8 +101,22 @@
                             <span class="fw-bold">₹<span id="subtotalDisplay">0.00</span></span>
                             <input type="hidden" name="subtotal" id="subtotalInput">
                         </div>
+                        <div class="mb-2" id="taxBreakdown" style="display: none;">
+                            <div class="d-flex justify-content-between small text-muted mb-1" id="cgstRow" style="display: none !important;">
+                                <span>CGST:</span>
+                                <span>₹<span id="cgstDisplay">0.00</span></span>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-1" id="sgstRow" style="display: none !important;">
+                                <span>SGST:</span>
+                                <span>₹<span id="sgstDisplay">0.00</span></span>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-1" id="igstRow" style="display: none !important;">
+                                <span>IGST:</span>
+                                <span>₹<span id="igstDisplay">0.00</span></span>
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-between mb-2">
-                            <span class="text-muted">Estimated Tax (GST):</span>
+                            <span class="text-muted">Total Tax (GST):</span>
                             <span class="fw-bold">₹<span id="taxDisplay">0.00</span></span>
                             <input type="hidden" name="tax_amount" id="taxInput">
                         </div>
@@ -131,6 +145,13 @@
 <script>
     $(document).ready(function() {
         let rowCount = 1;
+
+        const businessState = "{{ auth()->user()->business->state }}";
+        const customerStates = {
+            @foreach($customers as $customer)
+                "{{ $customer->id }}": "{{ $customer->state }}",
+            @endforeach
+        };
 
         $('#addRow').click(function() {
             let newRow = $('.item-row:first').clone();
@@ -200,7 +221,29 @@
 
             $('#totalDisplay').text(grandTotal.toFixed(2));
             $('#totalInput').val(grandTotal.toFixed(2));
+
+            // Tax Breakdown
+            const customerId = $('select[name="customer_id"]').val();
+            const customerState = customerStates[customerId];
+
+            $('#taxBreakdown').show();
+            if (customerState && businessState === customerState) {
+                $('#cgstDisplay').text((taxTotal / 2).toFixed(2));
+                $('#sgstDisplay').text((taxTotal / 2).toFixed(2));
+                $('#cgstRow, #sgstRow').attr('style', 'display: flex !important');
+                $('#igstRow').attr('style', 'display: none !important');
+            } else if (customerState) {
+                $('#igstDisplay').text(taxTotal.toFixed(2));
+                $('#igstRow').attr('style', 'display: flex !important');
+                $('#cgstRow, #sgstRow').attr('style', 'display: none !important');
+            } else {
+                $('#taxBreakdown').hide();
+            }
         }
+
+        $('select[name="customer_id"]').change(function() {
+            calculateTotals();
+        });
     });
 </script>
 @endsection

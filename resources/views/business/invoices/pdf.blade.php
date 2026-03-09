@@ -36,6 +36,9 @@
                     <div style="color: #64748b; font-size: 13px;">
                         {{ auth()->user()->business->phone }}<br>
                         {{ auth()->user()->business->email }}
+                        @if(auth()->user()->business->gst_number)
+                            <br><strong>GSTIN:</strong> {{ auth()->user()->business->gst_number }}
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -92,6 +95,24 @@
                 <span class="total-label">GST Total:</span>
                 <span class="total-value">&#8377;{{ number_format($invoice->tax_amount, 2) }}</span>
             </div>
+            @if($invoice->cgst_amount > 0)
+            <div class="total-row" style="font-size: 11px; color: #64748b;">
+                <span class="total-label">CGST:</span>
+                <span class="total-value">&#8377;{{ number_format($invoice->cgst_amount, 2) }}</span>
+            </div>
+            @endif
+            @if($invoice->sgst_amount > 0)
+            <div class="total-row" style="font-size: 11px; color: #64748b;">
+                <span class="total-label">SGST:</span>
+                <span class="total-value">&#8377;{{ number_format($invoice->sgst_amount, 2) }}</span>
+            </div>
+            @endif
+            @if($invoice->igst_amount > 0)
+            <div class="total-row" style="font-size: 11px; color: #64748b;">
+                <span class="total-label">IGST:</span>
+                <span class="total-value">&#8377;{{ number_format($invoice->igst_amount, 2) }}</span>
+            </div>
+            @endif
             @if($invoice->discount_amount > 0)
             <div class="total-row">
                 <span class="total-label">Discount:</span>

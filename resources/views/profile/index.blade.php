@@ -1,6 +1,9 @@
 @extends($layout)
 
 @section('content')
+@php
+$states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'];
+@endphp
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-lg-8">
@@ -75,6 +78,19 @@
                             <div class="col-md-6">
                                 <label class="form-label small text-muted text-uppercase fw-bold">Phone Number</label>
                                 <input type="text" name="phone" class="form-control" value="{{ old('phone', $business->phone) }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-muted text-uppercase fw-bold">GST Number</label>
+                                <input type="text" name="gst_number" class="form-control" value="{{ old('gst_number', $business->gst_number) }}" placeholder="e.g. 22AAAAA0000A1Z5">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-muted text-uppercase fw-bold">State</label>
+                                <select name="state" class="form-select" required>
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                        <option value="{{ $state }}" {{ old('state', $business->state) === $state ? 'selected' : '' }}>{{ $state }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             
                             <div class="col-12 mt-4 text-end">

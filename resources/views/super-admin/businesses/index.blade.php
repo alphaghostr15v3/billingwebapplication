@@ -1,6 +1,10 @@
 @extends('layouts.super-admin')
 
 @section('content')
+@php
+$states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry'];
+@endphp
+
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">Business Management</h2>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBusinessModal">
@@ -109,6 +113,19 @@
                         <label class="form-label">Phone Number</label>
                         <input type="text" name="phone" id="edit_phone" class="form-control" required>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">GST Number (Optional)</label>
+                        <input type="text" name="gst_number" id="edit_gst_number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <select name="state" id="edit_state" class="form-select" required>
+                            <option value="">Select State</option>
+                            @foreach($states as $state)
+                                <option value="{{ $state }}">{{ $state }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer border-0 p-4">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
@@ -147,6 +164,19 @@
                         <input type="text" name="phone" class="form-control" placeholder="e.g. +1234567890" required>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">GST Number (Optional)</label>
+                        <input type="text" name="gst_number" class="form-control" placeholder="e.g. 22AAAAA0000A1Z5">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">State</label>
+                        <select name="state" class="form-select" required>
+                            <option value="">Select State</option>
+                            @foreach($states as $state)
+                                <option value="{{ $state }}">{{ $state }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Initial Admin Password</label>
                         <input type="password" name="password" class="form-control" placeholder="Minimum 8 characters" required>
                     </div>
@@ -173,6 +203,8 @@
             $('#edit_owner_name').val(business.owner_name);
             $('#edit_email').val(business.email);
             $('#edit_phone').val(business.phone);
+            $('#edit_gst_number').val(business.gst_number);
+            $('#edit_state').val(business.state);
             
             $('#editBusinessModal').modal('show');
         });

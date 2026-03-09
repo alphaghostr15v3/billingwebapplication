@@ -31,6 +31,9 @@
                 {{ auth()->user()->business->owner_name }}<br>
                 {{ auth()->user()->business->phone }}<br>
                 {{ auth()->user()->business->email }}
+                @if(auth()->user()->business->gst_number)
+                    <br><span class="fw-bold">GSTIN:</span> {{ auth()->user()->business->gst_number }}
+                @endif
             </div>
         </div>
     </div>
@@ -84,10 +87,28 @@
                 <span class="text-muted">Subtotal:</span>
                 <span class="fw-bold">₹{{ number_format($invoice->subtotal, 2) }}</span>
             </div>
-            <div class="d-flex justify-content-between mb-3">
+            <div class="d-flex justify-content-between mb-2">
                 <span class="text-muted">GST Total:</span>
                 <span class="fw-bold">₹{{ number_format($invoice->tax_amount, 2) }}</span>
             </div>
+            @if($invoice->cgst_amount > 0)
+            <div class="d-flex justify-content-between small text-muted mb-2">
+                <span>CGST:</span>
+                <span>₹{{ number_format($invoice->cgst_amount, 2) }}</span>
+            </div>
+            @endif
+            @if($invoice->sgst_amount > 0)
+            <div class="d-flex justify-content-between small text-muted mb-2">
+                <span>SGST:</span>
+                <span>₹{{ number_format($invoice->sgst_amount, 2) }}</span>
+            </div>
+            @endif
+            @if($invoice->igst_amount > 0)
+            <div class="d-flex justify-content-between small text-muted mb-2">
+                <span>IGST:</span>
+                <span>₹{{ number_format($invoice->igst_amount, 2) }}</span>
+            </div>
+            @endif
             @if($invoice->discount_amount > 0)
             <div class="d-flex justify-content-between mb-3">
                 <span class="text-muted">Discount:</span>

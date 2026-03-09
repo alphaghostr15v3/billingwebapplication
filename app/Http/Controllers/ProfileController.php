@@ -76,12 +76,16 @@ class ProfileController extends Controller
             'business_name' => 'required|string|max:255',
             'owner_name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
+            'gst_number' => 'nullable|string|max:20',
+            'state' => 'required|string',
         ]);
 
         $user->business->update([
             'business_name' => $request->business_name,
             'owner_name' => $request->owner_name,
             'phone' => $request->phone,
+            'gst_number' => $request->gst_number,
+            'state' => $request->state,
         ]);
 
         return redirect()->back()->with('success', 'Business details updated successfully!');
