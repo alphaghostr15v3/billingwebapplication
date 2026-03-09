@@ -19,11 +19,13 @@ class InvoiceController extends Controller
         return view('business.invoices.index', compact('invoices'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $customers = Customer::all();
         $products = Product::where('stock_quantity', '>', 0)->get();
-        return view('business.invoices.create', compact('customers', 'products'));
+        $selectedCustomerId = $request->query('customer_id');
+
+        return view('business.invoices.create', compact('customers', 'products', 'selectedCustomerId'));
     }
 
     public function store(Request $request)

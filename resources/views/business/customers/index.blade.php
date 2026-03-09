@@ -35,6 +35,10 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
                     <td>{{ $customer->state ?? 'N/A' }}</td>
                     <td>{{ Str::limit($customer->address, 30) }}</td>
                     <td>
+                        <a href="{{ route('business.invoices.create', ['customer_id' => $customer->id]) }}" 
+                           class="btn btn-sm btn-outline-success" title="Create Invoice">
+                            <i class="fas fa-file-invoice"></i>
+                        </a>
                         <button class="btn btn-sm btn-outline-primary edit-customer" 
                             data-id="{{ $customer->id }}"
                             data-name="{{ $customer->name }}"

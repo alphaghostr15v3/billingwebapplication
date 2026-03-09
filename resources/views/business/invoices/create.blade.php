@@ -19,7 +19,9 @@
                     <select name="customer_id" class="form-select" required>
                         <option value="">Choose a customer...</option>
                         @foreach($customers as $customer)
-                            <option value="{{ $customer->id }}">{{ $customer->name }} ({{ $customer->phone }})</option>
+                            <option value="{{ $customer->id }}" {{ isset($selectedCustomerId) && $selectedCustomerId == $customer->id ? 'selected' : '' }}>
+                                {{ $customer->name }} ({{ $customer->phone }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -244,6 +246,11 @@
         $('select[name="customer_id"]').change(function() {
             calculateTotals();
         });
+
+        // Trigger calculation if a customer is pre-selected
+        if ($('select[name="customer_id"]').val()) {
+            calculateTotals();
+        }
     });
 </script>
 @endsection
