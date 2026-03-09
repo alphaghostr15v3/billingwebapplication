@@ -39,6 +39,9 @@ Route::prefix('business')->name('business.')->middleware(['auth', 'tenant'])->gr
     Route::resource('expenses', \App\Http\Controllers\Business\ExpenseController::class);
     Route::get('/reports', [\App\Http\Controllers\Business\ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export', [\App\Http\Controllers\Business\ReportController::class, 'export'])->name('reports.export');
+    Route::get('/reports/gst', [\App\Http\Controllers\Business\GSTReportController::class, 'index'])->name('reports.gst');
+    Route::get('/reports/gst/export', [\App\Http\Controllers\Business\GSTReportController::class, 'export'])->name('reports.gst.export');
+    Route::get('/reports/gst/pdf', [\App\Http\Controllers\Business\GSTReportController::class, 'downloadPDF'])->name('reports.gst.pdf');
     
     // Profile
     Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
