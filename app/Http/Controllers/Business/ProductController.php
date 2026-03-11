@@ -21,6 +21,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'sku' => 'required|unique:tenant.products,sku',
+            'hsn_number' => 'nullable|string|max:20',
             'category_id' => 'required|exists:tenant.categories,id',
             'price' => 'required|numeric',
         ]);
@@ -34,6 +35,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'hsn_number' => 'nullable|string|max:20',
             'category_id' => 'required|exists:tenant.categories,id',
             'price' => 'required|numeric',
         ]);

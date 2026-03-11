@@ -74,6 +74,7 @@ class InvoiceController extends Controller
                     'invoice_id' => $invoice->id,
                     'product_id' => $product->id,
                     'product_name' => $product->name,
+                    'hsn_number' => $product->hsn_number,
                     'quantity' => $item['quantity'],
                     'price' => $item['price'],
                     'gst_percentage' => $product->gst_percentage,

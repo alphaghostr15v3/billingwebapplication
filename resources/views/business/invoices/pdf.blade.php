@@ -66,6 +66,7 @@
             <thead>
                 <tr>
                     <th>Description</th>
+                    <th style="text-align: center;">HSN</th>
                     <th style="text-align: center;">Price</th>
                     <th style="text-align: center;">Qty</th>
                     <th style="text-align: right;">Total</th>
@@ -78,6 +79,7 @@
                         <div style="font-weight: bold;">{{ $item->product_name }}</div>
                         <div style="color: #64748b; font-size: 11px;">Tax: {{ $item->gst_percentage }}%</div>
                     </td>
+                    <td style="text-align: center;">{{ $item->hsn_number ?? '-' }}</td>
                     <td style="text-align: center;">&#8377;{{ number_format($item->price, 2) }}</td>
                     <td style="text-align: center;">{{ $item->quantity }}</td>
                     <td style="text-align: right; font-weight: bold;">&#8377;{{ number_format($item->total, 2) }}</td>

@@ -20,6 +20,7 @@
                 <tr>
                     <th>SKU</th>
                     <th>Product Name</th>
+                    <th>HSN</th>
                     <th>Category</th>
                     <th>Price</th>
                     <th>Stock</th>
@@ -34,6 +35,7 @@
                     <td>
                         <div class="fw-semibold">{{ $product->name }}</div>
                     </td>
+                    <td><span class="text-muted">{{ $product->hsn_number ?? '-' }}</span></td>
                     <td>{{ $product->category->name }}</td>
                     <td>₹{{ number_format($product->price, 2) }}</td>
                     <td>
@@ -53,6 +55,7 @@
                             data-id="{{ $product->id }}"
                             data-name="{{ $product->name }}"
                             data-sku="{{ $product->sku }}"
+                            data-hsn="{{ $product->hsn_number }}"
                             data-category="{{ $product->category_id }}"
                             data-price="{{ $product->price }}"
                             data-gst="{{ $product->gst_percentage }}"
@@ -132,6 +135,10 @@
                             <label class="form-label">Unit Price (₹)</label>
                             <input type="number" step="0.01" name="price" class="form-control" required>
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">HSN Number</label>
+                            <input type="text" name="hsn_number" class="form-control" placeholder="e.g. 8471">
+                        </div>
                         <div class="col-md-4">
                             <label class="form-label">GST Percentage (%)</label>
                             <input type="number" step="0.01" name="gst_percentage" class="form-control" value="0">
@@ -188,6 +195,10 @@
                             <label class="form-label">Unit Price (₹)</label>
                             <input type="number" step="0.01" name="price" id="edit_price" class="form-control" required>
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">HSN Number</label>
+                            <input type="text" name="hsn_number" id="edit_hsn" class="form-control">
+                        </div>
                         <div class="col-md-4">
                             <label class="form-label">GST Percentage (%)</label>
                             <input type="number" step="0.01" name="gst_percentage" id="edit_gst" class="form-control">
@@ -221,6 +232,7 @@
             const id = $(this).data('id');
             $('#edit_name').val($(this).data('name'));
             $('#edit_sku').val($(this).data('sku'));
+            $('#edit_hsn').val($(this).data('hsn'));
             $('#edit_category').val($(this).data('category'));
             $('#edit_price').val($(this).data('price'));
             $('#edit_gst').val($(this).data('gst'));

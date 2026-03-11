@@ -60,6 +60,7 @@
             <thead class="bg-light">
                 <tr class="text-uppercase small">
                     <th class="ps-3 py-3">Description</th>
+                    <th class="text-center py-3">HSN</th>
                     <th class="text-center py-3">Price</th>
                     <th class="text-center py-3">Qty</th>
                     <th class="text-end pe-3 py-3">Total</th>
@@ -72,6 +73,7 @@
                         <div class="fw-bold">{{ $item->product_name }}</div>
                         <div class="text-muted small">Tax ({{ $item->gst_percentage }}%)</div>
                     </td>
+                    <td class="text-center py-4">{{ $item->hsn_number ?? '-' }}</td>
                     <td class="text-center py-4">₹{{ number_format($item->price, 2) }}</td>
                     <td class="text-center py-4">{{ $item->quantity }}</td>
                     <td class="text-end pe-3 py-4 fw-bold">₹{{ number_format($item->total, 2) }}</td>

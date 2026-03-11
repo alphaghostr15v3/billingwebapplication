@@ -12,6 +12,7 @@ class InvoiceItem extends Model
         'invoice_id',
         'product_id',
         'product_name',
+        'hsn_number',
         'quantity',
         'price',
         'gst_percentage',
