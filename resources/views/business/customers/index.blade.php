@@ -17,6 +17,7 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
             <thead class="table-light">
                 <tr>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>GST Number</th>
@@ -29,6 +30,11 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
                 @foreach($customers as $customer)
                 <tr>
                     <td>{{ $customer->name }}</td>
+                    <td>
+                        <span class="badge {{ $customer->customer_type === 'business' ? 'bg-primary' : 'bg-info' }}">
+                            {{ ucfirst($customer->customer_type) }}
+                        </span>
+                    </td>
                     <td>{{ $customer->phone }}</td>
                     <td>{{ $customer->email ?? 'N/A' }}</td>
                     <td>{{ $customer->gst_number ?? 'N/A' }}</td>
@@ -42,6 +48,7 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
                         <button class="btn btn-sm btn-outline-primary edit-customer" 
                             data-id="{{ $customer->id }}"
                             data-name="{{ $customer->name }}"
+                            data-type="{{ $customer->customer_type }}"
                             data-phone="{{ $customer->phone }}"
                             data-email="{{ $customer->email }}"
                             data-gst="{{ $customer->gst_number }}"
@@ -77,6 +84,13 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
                     <div class="mb-3">
                         <label class="form-label">Full Name</label>
                         <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Customer Type</label>
+                        <select name="customer_type" class="form-select" required>
+                            <option value="individual">Individual / B2C</option>
+                            <option value="business">Business / B2B</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
@@ -130,6 +144,13 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
                         <input type="text" name="name" id="edit_name" class="form-control" required>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Customer Type</label>
+                        <select name="customer_type" id="edit_type" class="form-select" required>
+                            <option value="individual">Individual / B2C</option>
+                            <option value="business">Business / B2B</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" name="phone" id="edit_phone" class="form-control" required>
                     </div>
@@ -173,6 +194,7 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
         $('.edit-customer').click(function() {
             const id = $(this).data('id');
             const name = $(this).data('name');
+            const type = $(this).data('type');
             const phone = $(this).data('phone');
             const email = $(this).data('email');
             const gst = $(this).data('gst');
@@ -180,6 +202,7 @@ $states = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgar
             const address = $(this).data('address');
 
             $('#edit_name').val(name);
+            $('#edit_type').val(type);
             $('#edit_phone').val(phone);
             $('#edit_email').val(email);
             $('#edit_gst').val(gst);

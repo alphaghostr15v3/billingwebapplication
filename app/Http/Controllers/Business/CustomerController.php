@@ -18,6 +18,7 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'customer_type' => 'required|in:business,individual',
             'phone' => 'required',
             'email' => 'nullable|email',
         ]);
@@ -31,6 +32,7 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'customer_type' => 'required|in:business,individual',
             'phone' => 'required',
             'email' => 'nullable|email',
         ]);

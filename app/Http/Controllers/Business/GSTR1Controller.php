@@ -24,8 +24,8 @@ class GSTR1Controller extends Controller
 
         $invoices = $query->latest()->get();
 
-        $b2bInvoices = $invoices->filter(fn($inv) => !empty($inv->customer->gst_number));
-        $b2cInvoices = $invoices->filter(fn($inv) => empty($inv->customer->gst_number));
+        $b2bInvoices = $invoices->filter(fn($inv) => $inv->customer->customer_type === 'business');
+        $b2cInvoices = $invoices->filter(fn($inv) => $inv->customer->customer_type === 'individual');
 
         $summary = [
             'b2b_count' => $b2bInvoices->count(),
@@ -52,7 +52,7 @@ class GSTR1Controller extends Controller
                 Carbon::parse($endDate)->endOfDay()
             ])
             ->whereHas('customer', function($q) {
-                $q->whereNotNull('gst_number')->where('gst_number', '!=', '');
+                $q->where('customer_type', 'business');
             })
             ->with(['customer', 'items'])
             ->get()
@@ -104,7 +104,7 @@ class GSTR1Controller extends Controller
                 Carbon::parse($endDate)->endOfDay()
             ])
             ->whereHas('customer', function($q) {
-                $q->whereNull('gst_number')->orWhere('gst_number', '');
+                $q->where('customer_type', 'individual');
             })
             ->with(['customer', 'items'])
             ->get()
