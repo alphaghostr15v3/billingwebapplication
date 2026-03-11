@@ -46,6 +46,9 @@
                 Phone: {{ $invoice->customer->phone }}<br>
                 Email: {{ $invoice->customer->email ?? 'N/A' }}<br>
                 Address: {{ $invoice->customer->address ?? 'N/A' }}
+                @if($invoice->customer->gst_number)
+                    <br><span class="fw-bold">GSTIN:</span> {{ $invoice->customer->gst_number }}
+                @endif
             </div>
         </div>
         <div class="col-6 ps-4 text-end">

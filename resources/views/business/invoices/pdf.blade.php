@@ -52,6 +52,9 @@
                     <div style="color: #64748b;">
                         {{ $invoice->customer->phone }}<br>
                         {{ $invoice->customer->address }}
+                        @if($invoice->customer->gst_number)
+                            <br><strong>GSTIN:</strong> {{ $invoice->customer->gst_number }}
+                        @endif
                     </div>
                 </td>
                 <td style="border: none; text-align: right;">
