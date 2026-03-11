@@ -38,7 +38,10 @@ class InvoiceController extends Controller
         ]);
 
         return DB::connection('tenant')->transaction(function () use ($request) {
-            $invoiceNumber = 'INV-' . strtoupper(Str::random(8));
+            $lastInvoice = Invoice::latest()->first();
+            $nextNumber = $lastInvoice ? ((int) str_replace('INV-', '', $lastInvoice->invoice_number)) + 1 : 1;
+            $invoiceNumber = 'INV-' . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+            
             $business = auth()->user()->business;
             $customer = Customer::findOrFail($request->customer_id);
 
@@ -100,5 +103,27 @@ class InvoiceController extends Controller
         $invoice->load(['customer', 'items']);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('business.invoices.pdf', compact('invoice'));
         return $pdf->download('Invoice-' . $invoice->invoice_number . '.pdf');
+    }
+
+    public function destroy(Invoice $invoice)
+    {
+        return DB::connection('tenant')->transaction(function () use ($invoice) {
+            // Restore Stock
+            foreach ($invoice->items as $item) {
+                if ($item->product_id) {
+                    $product = Product::find($item->product_id);
+                    if ($product) {
+                        $product->increment('stock_quantity', $item->quantity);
+                    }
+                }
+            }
+
+            // Delete Invoice Items (handled by cascade if set, but let's be explicit if not sure)
+            // The migration didn't show cascade for invoice_items, but let's check
+            $invoice->items()->delete();
+            $invoice->delete();
+
+            return redirect()->back()->with('success', 'Invoice deleted and stock restored successfully!');
+        });
     }
 }

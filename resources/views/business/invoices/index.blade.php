@@ -43,6 +43,13 @@
                         <a href="{{ route('business.invoices.download', $invoice->id) }}" class="btn btn-sm btn-outline-success" title="Download PDF">
                             <i class="fas fa-file-pdf"></i>
                         </a>
+                        <form action="{{ route('business.invoices.destroy', $invoice->id) }}" method="POST" class="d-inline delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Invoice">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -57,6 +64,23 @@
     $(document).ready(function() {
         $('#invoicesTable').DataTable({
             order: [[0, 'desc']]
+        });
+
+        $('.delete-form').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Deleting this invoice will restore the product stock. This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4f46e5',
+                cancelButtonColor: '#ef4444',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
         });
     });
 </script>
