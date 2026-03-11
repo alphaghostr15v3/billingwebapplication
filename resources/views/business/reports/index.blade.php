@@ -10,6 +10,9 @@
         <a href="{{ route('business.reports.export') }}" class="btn btn-primary d-print-none">
             <i class="fas fa-download me-2"></i>Export Excel
         </a>
+        <a href="{{ route('business.reports.gstr1') }}" class="btn btn-outline-primary d-print-none">
+            <i class="fas fa-file-contract me-2"></i>GSTR-1 Report
+        </a>
     </div>
 </div>
 

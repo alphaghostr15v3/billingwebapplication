@@ -43,6 +43,11 @@ Route::prefix('business')->name('business.')->middleware(['auth', 'tenant'])->gr
     Route::get('/reports/gst/export', [\App\Http\Controllers\Business\GSTReportController::class, 'export'])->name('reports.gst.export');
     Route::get('/reports/gst/pdf', [\App\Http\Controllers\Business\GSTReportController::class, 'downloadPDF'])->name('reports.gst.pdf');
     
+    // GSTR-1
+    Route::get('/reports/gstr1', [\App\Http\Controllers\Business\GSTR1Controller::class, 'index'])->name('reports.gstr1');
+    Route::get('/reports/gstr1/b2b', [\App\Http\Controllers\Business\GSTR1Controller::class, 'exportB2B'])->name('reports.gstr1.b2b');
+    Route::get('/reports/gstr1/b2c', [\App\Http\Controllers\Business\GSTR1Controller::class, 'exportB2C'])->name('reports.gstr1.b2c');
+    
     // Profile
     Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

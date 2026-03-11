@@ -179,6 +179,9 @@
                 <a href="{{ route('business.reports.gst') }}" class="sidebar-link {{ request()->routeIs('business.reports.gst') ? 'active' : '' }}">
                     <i class="fas fa-file-invoice-dollar"></i> GST Reports
                 </a>
+                <a href="{{ route('business.reports.gstr1') }}" class="sidebar-link {{ request()->routeIs('business.reports.gstr1') ? 'active' : '' }}">
+                    <i class="fas fa-file-contract"></i> GSTR-1 Report
+                </a>
                 <a href="{{ route('business.subscriptions.index') }}" class="sidebar-link {{ request()->routeIs('business.subscriptions.*') ? 'active' : '' }}">
                     <i class="fas fa-crown"></i> Subscriptions
                 </a>
