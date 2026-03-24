@@ -16,7 +16,7 @@
                     <th>Return #</th>
                     <th>Customer</th>
                     <th>Date</th>
-                    <th>Total Refund</th>
+                    <th>Total</th>
                     <th>Actions</th>
                 </tr>
             </thead>

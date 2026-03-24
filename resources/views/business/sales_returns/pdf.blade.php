@@ -52,7 +52,7 @@
                 <th>Qty</th>
                 <th>Price</th>
                 <th>Tax</th>
-                <th>Total Refund</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
@@ -71,7 +71,7 @@
     <div class="totals">
         <div class="totals-row">Subtotal: <strong>{{ number_format($salesReturn->subtotal, 2) }}</strong></div>
         <div class="totals-row">Tax Amount: <strong>{{ number_format($salesReturn->tax_amount, 2) }}</strong></div>
-        <div class="total-amount">Total Refund Amount: {{ number_format($salesReturn->total_amount, 2) }}</div>
+        <div class="total-amount">Total: {{ number_format($salesReturn->total_amount, 2) }}</div>
     </div>
     
     @if($salesReturn->reason)

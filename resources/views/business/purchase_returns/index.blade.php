@@ -16,7 +16,7 @@
                     <th>Note #</th>
                     <th>Vendor Name</th>
                     <th>Date</th>
-                    <th>Total Refund</th>
+                    <th>Total</th>
                     <th>Actions</th>
                 </tr>
             </thead>

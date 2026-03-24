@@ -85,7 +85,7 @@
                     <input type="hidden" name="tax_amount" id="inputTax" value="0">
                 </div>
                 <div class="d-flex justify-content-end fs-5">
-                    <span class="fw-bold me-3">Total Refund:</span>
+                    <span class="fw-bold me-3">Total:</span>
                     <strong class="text-primary" id="displayTotal">₹0.00</strong>
                     <input type="hidden" name="total_amount" id="inputTotal" value="0">
                 </div>

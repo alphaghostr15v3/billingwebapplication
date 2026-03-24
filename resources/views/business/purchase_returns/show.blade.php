@@ -31,7 +31,7 @@
                     <th>Unit Price</th>
                     <th>Subtotal</th>
                     <th>Tax</th>
-                    <th>Total Refund</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
         <div class="col-sm-6 text-end">
             <div class="mb-2">Subtotal: ₹{{ number_format($purchaseReturn->subtotal, 2) }}</div>
             <div class="mb-2">Tax: ₹{{ number_format($purchaseReturn->tax_amount, 2) }}</div>
-            <div class="fs-4 fw-bold mt-3">Total Refund: ₹{{ number_format($purchaseReturn->total_amount, 2) }}</div>
+            <div class="fs-4 fw-bold mt-3">Total: ₹{{ number_format($purchaseReturn->total_amount, 2) }}</div>
         </div>
     </div>
 
