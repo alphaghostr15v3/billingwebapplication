@@ -36,6 +36,13 @@ Route::prefix('business')->name('business.')->middleware(['auth', 'tenant'])->gr
     Route::post('categories', [\App\Http\Controllers\Business\ProductController::class, 'storeCategory'])->name('categories.store');
     Route::resource('invoices', \App\Http\Controllers\Business\InvoiceController::class);
     Route::get('/invoices/{invoice}/download', [\App\Http\Controllers\Business\InvoiceController::class, 'downloadPDF'])->name('invoices.download');
+    
+    // Returns
+    Route::resource('sales-returns', \App\Http\Controllers\Business\SalesReturnController::class);
+    Route::get('/sales-returns/{sales_return}/download', [\App\Http\Controllers\Business\SalesReturnController::class, 'downloadPDF'])->name('sales-returns.download');
+    Route::resource('purchase-returns', \App\Http\Controllers\Business\PurchaseReturnController::class);
+    Route::get('/purchase-returns/{purchase_return}/download', [\App\Http\Controllers\Business\PurchaseReturnController::class, 'downloadPDF'])->name('purchase-returns.download');
+
     Route::resource('expenses', \App\Http\Controllers\Business\ExpenseController::class);
     Route::get('/reports', [\App\Http\Controllers\Business\ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export', [\App\Http\Controllers\Business\ReportController::class, 'export'])->name('reports.export');

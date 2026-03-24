@@ -173,6 +173,12 @@
                 <a href="{{ route('business.expenses.index') }}" class="sidebar-link {{ request()->routeIs('business.expenses.*') ? 'active' : '' }}">
                     <i class="fas fa-wallet"></i> Expenses
                 </a>
+                <a href="{{ route('business.sales-returns.index') }}" class="sidebar-link {{ request()->routeIs('business.sales-returns.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-invoice"></i> Credit Notes
+                </a>
+                <a href="{{ route('business.purchase-returns.index') }}" class="sidebar-link {{ request()->routeIs('business.purchase-returns.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-invoice-dollar"></i> Debit Notes
+                </a>
                 <a href="{{ route('business.reports.index') }}" class="sidebar-link {{ request()->routeIs('business.reports.index') ? 'active' : '' }}">
                     <i class="fas fa-chart-bar"></i> Reports
                 </a>
